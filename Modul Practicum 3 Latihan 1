@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Product{
+    char nama[50];
+    float harga;
+    int stok;
+};
+
+int main(void) {
+
+    struct Product produk[50];
+    int jproduk, i, ptermahal = 0;
+    printf("Masukkan jumlah produk (dibawah 50): ");
+    scanf("%d", &jproduk);
+    
+    for (i = 0; i < jproduk; i++) {
+        printf("\nProduk no %d\n", i + 1);
+
+        printf("Nama: ");
+        scanf("%s", produk[i].nama);
+        
+        printf("Harga: ");
+        scanf("%f", &produk[i].harga);
+
+        printf("Stok: ");
+        scanf("%d", &produk[i].stok);
+
+        
+    }
+
+    for (i = 1; i < jproduk; i++) {
+        if (produk[i].harga > produk[ptermahal].harga) {
+            ptermahal = i;
+        }
+    }
+
+    printf("\nProduk dengan harga tertinggi:\n");
+    printf("Nama : %s\n", produk[ptermahal].nama);
+    printf("Harga: %.2f\n", produk[ptermahal].harga);
+    printf("Stok : %d\n", produk[ptermahal].stok);
+
+    return 0;
+}
