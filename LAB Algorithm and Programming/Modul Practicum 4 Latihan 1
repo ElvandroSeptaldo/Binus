@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *FileAngka, *FileGenap, *FileGanjil;
+    int number;
+
+    // Membuka file untuk membaca
+    FileAngka = fopen("angka.txt", "r");
+    if (FileAngka == NULL) {
+        perror("Error opening angka.txt");
+        return EXIT_FAILURE;
+    }
+
+    // Membuka file untuk menulis bilangan genap
+    FileGenap = fopen("genap.txt", "w");
+    if (FileGenap == NULL) {
+        perror("Error opening genap.txt");
+        fclose(FileAngka);
+        return EXIT_FAILURE;
+    }
+
+    // Membuka file untuk menulis bilangan ganjil
+    FileGanjil = fopen("ganjil.txt", "w");
+    if (FileGanjil == NULL) {
+        perror("Error opening ganjil.txt");
+        fclose(FileAngka);
+        fclose(FileGenap);
+        return EXIT_FAILURE;
+    }
+
+    // Membaca bilangan dari file dan memisahkan ke dalam genap dan ganjil
+    while (fscanf(FileAngka, "%d", &number) == 1) {
+        if (number % 2 == 0) {
+            fprintf(FileGenap, "%d ", number); // Menyimpan bilangan genap
+        } else {
+            fprintf(FileGanjil, "%d ", number); // Menyimpan bilangan ganjil
+        }
+    }
+
+    // Menutup semua file
+    fclose(FileAngka);
+    fclose(FileGenap);
+    fclose(FileGanjil);
+
+    printf("Proses pemisahan bilangan selesai.\n");
+    return EXIT_SUCCESS;
+}
